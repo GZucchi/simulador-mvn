@@ -1,7 +1,3 @@
-# Simulador MVN
-
-Projeto de uma Máquina de Von Neuman para disciplina PCS3216 Sistemas de Programação da Escola Politécnica da USP, realizado no primeiro semestre de 2020.
-
 # Manual de uso do Simulador MVN (Máquina de Von Neumann)
 
 Atualmente, a estrutura mínima para o funcionamento correto do projeto é a seguinte:
