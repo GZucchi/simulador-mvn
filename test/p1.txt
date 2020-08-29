@@ -1,0 +1,9 @@
+        ORG     500     ; first line of the program
+        LOAD    X       ; 
+        PD              ; print acumulator content
+loop    ADD     Y       ; loop
+        PD              ; print acumulator content
+        JUMPN   loop    ; if acumulator is negative, jump to loop
+X       DATA    -10     ; 
+Y       DATA    3       ;
+        END             ; end of the program

@@ -1,0 +1,43 @@
+            ORG         0x100       ;
+START       LOAD        COMP        ; inicia contador de letras
+            STORE       CONT        ; inicia contador de loop
+IN          LOAD        LDA0        ; constroi inicialmente a instrucao LOAD INIC adiante 
+                                    ; (a ser incrementada a cada execucao do loop)
+            STORE       LOAD        ;
+            LOAD        LDA0+1      ;
+            STORE       LOAD+1      ;
+LOAD        LOAD        INIC        ; executa a instrucao construida logo a seguir
+            PD          SAIDA       ; grava-a no arquivo de SAIDA
+            LOAD        CONT        ; testa se e ultima letra
+            SUB         UM          ;
+            STORE       CONT        ;
+            JUMPZ       FORA        ;
+            LOAD        LOAD+1      ; incrementa o endereco a ser acessado no vetor de letras
+            ADD         UM          ; incrementa o byte menos significativo
+            STORE       LOAD+1      ; 
+            JUMPZ       INCR        ; se deu zero, vai incrementar o outro byte
+            JUMP        LOAD        ;
+INCR        LOAD        LOAD        ;
+            ADD         UM          ;
+            STORE       LOAD        ;
+            JUMP        LOAD        ;
+FORA        STOP        START       ; para a maquina e volta ao inicio se for reacionada
+;-----------------------------------; dispositivos virtuais de entrada e saida
+            ORG         3           ;
+ENTRADA                             ;
+            ORG         4           ;
+SAIDA                               ;
+;-----------AREA DE DADOS-----------;
+            ORG         0x200       ;
+UM          DATA        1           ; constante 1
+CONT        DATA        0           ; variavel CONT iniciada com zero
+LDA0        LOAD        INIC        ; codigo da instrucao LDA INIC
+            ORG         0xf00       ;
+COMP        DATA        5           ;
+INIC        DATA        "t"         ; primeira letra do texto
+            DATA        "e"         ;
+            DATA        "x"         ;
+            DATA        "t"         ;
+            DATA        "o"         ; ultima letra do texto
+;-----------------------------------;
+            END         START       ; endereco inicial do programa

@@ -1,0 +1,56 @@
+            ORG         0x498       ;
+START:      LOAD        COMP        ; inicia contador de letras
+            STORE       CONT        ; inicia contador de loop
+IN:         LOAD        LDA0        ; constroi inicialmente a instrucao LOAD INIC adiante 
+            STORE       LOAD        ;
+            LOAD        LDA0+1      ;
+            STORE       LOAD+1      ;
+LOAD:       LOAD        NUSP        ; executa a instrucao construida logo a seguir
+;            PD          SAIDA       ; grava-a no arquivo de SAIDA
+            ADD         SOMA        ;
+            STORE       SOMA        ;
+            LOAD        SOMA        ;
+            PD          SAIDA       ;
+;
+            LOAD        CONT        ; testa se e ultima letra
+            SUB         UM          ;
+            STORE       CONT        ;
+            JUMPZ       FORA        ;
+;            
+            LOAD        LOAD+1      ; incrementa o endereco a ser acessado no vetor de letras
+            ADD         UM          ; incrementa o byte menos significativo
+            STORE       LOAD+1      ; 
+            JUMPZ       INCR        ; se deu zero, vai incrementar o outro byte
+;
+            JUMP        LOAD        ;
+;            
+INCR:       LOAD        LOAD        ;
+            ADD         UM          ;
+            STORE       LOAD        ;
+            JUMP        LOAD        ;
+FORA:       STOP        START       ; para a maquina e volta ao inicio se for reacionada
+;-----------------------------------; dispositivos virtuais de entrada e saida
+            ORG         0x3         ;
+ENTRADA:                            ;
+            ORG         0x4         ;
+SAIDA:                              ;
+;-----------AREA DE DADOS-----------;
+            ORG         0x200       ;
+UM:         DATA        1           ; constante 1
+CONT:       DATA        0           ; variavel CONT iniciada com zero
+SOMA:       DATA        0           ; variavel SOMA iniciada com zero
+LDA0:       LOAD        NUSP        ; codigo da instrucao LOAD NUSP
+LDA1:       LOAD        CODIGO      ; codigo da instrucao LODA CODIGO
+            ORG         0xf00       ;
+COMP:       DATA        8           ;
+NUSP:       DATA        8           ; primeira numero do NUSP
+            DATA        9           ; 
+            DATA        1           ;
+            DATA        3           ;
+            DATA        9           ;
+            DATA        9           ;
+            DATA        8           ;
+            DATA        0           ; ultima numero do NUSP
+CODIGO:                             ;
+;-----------------------------------;
+            END         START       ; endereco inicial do programa

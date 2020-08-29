@@ -1,0 +1,20 @@
+mnemonico;opcode;size;instruction;class;type
+JUMP;0;2;jump incondicional;instruction;address
+JUMPZ;1;2;jump if zero;instruction;address
+JUMPN;2;2;jump if negative;instruction;address
+ADD;3;2;sum;instruction;constant
+SUB;4;2;subtract;instruction;constant
+MUL;5;2;multiply;instruction;constant
+DIV;6;2;divide;instruction;constant
+LOAD;7;2;load value;instruction;address
+STORE;8;2;store in memory;instruction;address
+CALL;9;2;call procedure;instruction;address
+RTN;A;1;return from procedure;instruction;address
+STOP;B;2;stop the program;instruction;address
+READ;C;2;read a byte to the acumulator;instruction;constant
+WRITE;D;1;write with acumulator byte;instruction;address
+PD;E;2;print acumulator;instruction;address
+ORG;;1;new origin;pseudo;address
+BLOC;;1;reserve area;pseudo;constant
+DATA;;1;fill memory with constant;pseudo;constant
+END;;1;physical end of the source code;pseudo;address
